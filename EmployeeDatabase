@@ -1,0 +1,197 @@
+import java.util.Scanner;
+public class EmployeeDatabase {
+	public static void main(String[] args) {
+		
+		//final String ANSI_CLS = "\u001b[2J";
+		//final String ANSI_HOME = "\u001b[H";
+		Employee[] employees = {new Employee("David Beckham", 41, "President", 230000.0), new Employee("Helen Pinterest", 41, "Chief Executive", 230000.0), new Employee("Ada Lovelace", 41, "Vice President", 230000.0), new Employee("Edward Bananahead", 41, "President", 230000.0), new Employee("Edward Bananahead", 41, "President", 230000.0)};
+		int choice;
+		boolean running = true;
+
+		while(running == true){
+			//System.out.print(ANSI_CLS + ANSI_HOME);
+			//System.out.flush();
+			//System.out.println("");
+			choice = menuChoice();
+
+			switch(choice){
+				case(1):
+					printAllEmployees(employees);
+				break;
+				case(2):
+					printEmployee(employees);
+				break;
+				case(3):
+					addEmployee(employees);
+				break;
+				case(4):
+					//increaseSalary(employees);
+				break;
+				case(5):
+					averageAge(employees);
+				break;
+				case(6):
+					//printDesignation(employees);
+				break;
+				case(7):
+					printDuplicates(employees);
+				break;
+				case(9):
+					System.out.println("Shutting down...");
+					running = false;
+					break;
+				default:
+					System.out.println("This is not a valid option");
+			}
+		}
+	}
+
+	private static int menuChoice(){
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Choose a number and press Enter: \n");
+		System.out.println("*****************************************************************************\n");
+		System.out.println("[1] Print All Employees \t\t\t [2] Print Employee details ");
+		System.out.println("[3] Adds and Employee \t\t\t\t [4] Inceases an Employees Salary");
+		System.out.println("[5] Shows the Average age of all Employees \t [6] Prints Designation of Employee");
+		System.out.println("[7] Prints Duplicate Employees \t\t\t [9] Quit");
+		System.out.println("\n****************************************************************************");
+
+		return input.nextInt();
+	}
+
+	private static void printAllEmployees(Employee[] emps){
+		System.out.println("Here is a list of all employees: \n");
+		for (int i = 0; i<emps.length; i++){
+			System.out.println(emps[i]);
+		}
+
+	enterToContinue();
+	}
+
+	private static void printEmployee(Employee[] emps){
+
+		String name;
+		boolean found = false;
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Enter the name of the employee that you would like to find:");
+		name = input.nextLine();
+
+		for (int i = 0; i < emps.length; i++){
+			if ((emps[i].getName()).equals(name)) {
+				System.out.println(emps[i]);
+				found = true;
+			}
+		}
+
+	if (!found){
+		System.out.println("The employee could not be found.");
+	}
+
+	enterToContinue();
+	}
+
+	private static void addEmployee(Employee[] emps) {
+
+		String name;
+		Scanner input = new Scanner(System.in);
+		Scanner Name = new Scanner(System.in);
+		Scanner Job = new Scanner(System.in);
+		Scanner Age = new Scanner(System.in);
+		Scanner Salary = new Scanner(System.in);
+
+		System.out.println("Enter the name of the employee that you would like to find:");
+		name = input.nextLine();
+
+		for (int i = 0; i < emps.length; i++){
+			if (("").equals(name)) {
+				System.out.println("Insert the details you want for this employee (Name, Designation, Age, Salary:");
+				emps[i].setName(Name.nextLine());
+				emps[i].setDesignation(Job.nextLine());
+				emps[i].setAge(Age.nextInt());
+				emps[i].setSalary(Salary.nextDouble());
+			}
+		}
+	enterToContinue();
+	} 
+
+	private static void increaseSalary(Employee[] emps){
+
+		double calc = 0;
+		int percentToAdd = 100; 
+		String name;
+		Scanner input = new Scanner(System.in);
+		Scanner percent = new Scanner(System.in);
+
+		System.out.println("Enter the name of the employee that you would like to increase the salary of:");
+		name = input.nextLine();
+
+		for (int i = 0; i < emps.length; i++){
+			if ((emps[i].getName()).equals(name)) {
+				System.out.println("Please type the percentage you want to increase the salary by");
+				percentToAdd = percentToAdd + percent.nextInt();
+				calc = emps[i].getSalary()/100;
+				calc = calc * percentToAdd;
+				emps[i].setSalary(calc);
+			}
+		}
+	enterToContinue();
+	}
+
+	private static void averageAge(Employee[] emps){
+		double average = 0; 
+
+		for (int i = 0; i < emps.length; i++){
+			average = average + emps[i].getAge();
+		}
+	average = average/emps.length;
+	System.out.println("The average age is: " + average + "years old");
+	enterToContinue();
+	}
+
+	private static void printDesignation(Employee[] emps){
+
+		String name;
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Enter the name of the employee that you would like to find the designation of:");
+		name = input.nextLine();
+
+		for (int i = 0; i < emps.length; i++){
+			if ((emps[i].getName()).equals(name)) {
+				System.out.println("Designation of " + emps[i].getName() + " is " + emps[i].getDesignation());
+			}
+		}
+	enterToContinue();
+	}
+
+	private static void printDuplicates(Employee[] emps){
+
+		for (int i = 0; i < emps.length; i++){
+			if ((emps[0]).equals(emps[i])) {
+				System.out.println("There is a duplicate of " + emps[0].getName());
+			}
+
+			if ((emps[1]).equals(emps[i])) {
+				System.out.println("There is a duplicate of " + emps[1].getName());
+			}
+
+			if ((emps[2]).equals(emps[i])) {
+				System.out.println("There is a duplicate of " + emps[2].getName());
+			}
+
+			if ((emps[3]).equals(emps[i])) {
+				System.out.println("There is a duplicate of " + emps[3].getName());
+			}
+		}
+	enterToContinue();
+	}
+
+	private static void enterToContinue(){
+		Scanner getEnter = new Scanner(System.in);
+		System.out.println("Press enter to continue");
+		getEnter.nextLine();
+	}
+	
+}
